@@ -512,9 +512,12 @@ section { padding-block: clamp(var(--space-16), 8vw, var(--space-32)); }
 <!-- NAV -->
 <nav class="nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">
-      <img src="logoFirstDraft.jpg" width="36" height="36" alt="Pacific Foundry" loading="eager">
-    </div>
+    <div class="nav-logo-mark" style="width:40px;height:40px;overflow:hidden;border-radius:6px;flex-shrink:0;">
+     <img src="logoFirstDraft.jpg" 
+       alt="Pacific Foundry" 
+       style="width:120px;height:80px;object-fit:cover;object-position:-4px -4px;margin:0;"
+       loading="eager">
+   </div>
     Pacific Foundry
   </a>
   <div class="nav-links">
