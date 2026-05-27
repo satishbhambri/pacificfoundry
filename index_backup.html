@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Foundry — Build the Frontier</title>
+<meta name="description" content="Pacific Foundry is a next-generation accelerator for founders building at the edge of AI, quantum, and deep tech. Apply to our inaugural cohort.">
+<meta property="og:title" content="Pacific Foundry — Build the Frontier">
+<meta property="og:description" content="A next-generation accelerator for founders building at the edge of AI, quantum, and deep tech.">
+<meta property="og:image" content="https://picsum.photos/seed/pacific-foundry/1200/630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --text-hero: clamp(3rem,     0.5rem  + 7vw,    8rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+  --space-32: 8rem;
+
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;  --radius-xl: 1rem; --radius-full: 9999px;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --content-narrow: 640px;
+  --content-default: 960px;
+  --content-wide: 1200px;
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Pacific Foundry Custom Palette — Navy + Copper */
+:root, [data-theme="light"] {
+  --color-bg:              #f5f4f0;
+  --color-surface:         #f8f7f4;
+  --color-surface-2:       #faf9f7;
+  --color-surface-offset:  #edeae4;
+  --color-divider:         #d8d4cc;
+  --color-border:          #ccc8bf;
+  --color-text:            #1a1710;
+  --color-text-muted:      #6b6760;
+  --color-text-faint:      #b0ada6;
+  --color-text-inverse:    #f5f4f0;
+  --color-primary:         #1a2744;
+  --color-primary-hover:   #0f1a2e;
+  --color-accent:          #b87333;
+  --color-accent-hover:    #9a5f28;
+  --color-accent-glow:     rgba(184,115,51,0.15);
+  --shadow-sm: 0 1px 2px rgba(26,23,16,0.06);
+  --shadow-md: 0 4px 12px rgba(26,23,16,0.08);
+  --shadow-lg: 0 12px 32px rgba(26,23,16,0.12);
+}
+
+[data-theme="dark"] {
+  --color-bg:              #0d0f14;
+  --color-surface:         #121520;
+  --color-surface-2:       #171b26;
+  --color-surface-offset:  #1c2030;
+  --color-divider:         #242838;
+  --color-border:          #2e3347;
+  --color-text:            #e8e6e0;
+  --color-text-muted:      #8a8880;
+  --color-text-faint:      #4a4840;
+  --color-text-inverse:    #0d0f14;
+  --color-primary:         #c9d4f0;
+  --color-primary-hover:   #e0e8ff;
+  --color-accent:          #d4894a;
+  --color-accent-hover:    #e8a060;
+  --color-accent-glow:     rgba(212,137,74,0.2);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-16);
+}
+body {
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+img { display: block; max-width: 100%; height: auto; }
+ul { list-style: none; }
+button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1,h2,h3,h4 { text-wrap: balance; line-height: 1.15; }
+p { text-wrap: pretty; }
+a, button { transition: color var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+.fade-in { opacity: 1; }
+@supports (animation-timeline: scroll()) {
+  .fade-in {
+    opacity: 0;
+    animation: reveal-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+}
+@keyframes reveal-fade { to { opacity: 1; } }
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+.container {
+  max-width: var(--content-wide);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+.container--narrow { max-width: var(--content-default); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: var(--space-4) var(--space-6);
+  display: flex; align-items: center; justify-content: space-between;
+  background: color-mix(in oklab, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(from var(--color-text) l c h / 0.06);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: 0.04em;
+}
+.nav-logo-mark {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; flex-shrink: 0; overflow: hidden; border-radius: 6px;
+}
+.nav-logo-mark img { width: 36px; height: 36px; object-fit: cover; object-position: center top; display: block; }
+.nav-links {
+  display: flex; align-items: center; gap: var(--space-8);
+}
+.nav-links a {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+.nav-links a:hover { color: var(--color-text); }
+.nav-right { display: flex; align-items: center; gap: var(--space-4); }
+.theme-toggle {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted); border-radius: var(--radius-full);
+}
+.theme-toggle:hover { color: var(--color-text); background: var(--color-surface-offset); }
+.btn-nav {
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+.btn-nav:hover { background: var(--color-accent-hover); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100dvh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--space-32) var(--space-6) var(--space-24);
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 60% 50%, var(--color-accent-glow) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 15% 80%, color-mix(in oklab, var(--color-primary) 8%, transparent) 0%, transparent 60%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+  background-image:
+    linear-gradient(var(--color-text) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-text) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 1; max-width: var(--content-wide); margin-inline: auto; width: 100%; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 30%, transparent);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  max-width: 12ch;
+  margin-bottom: var(--space-8);
+}
+.hero-heading em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+.hero-body {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+  line-height: 1.65;
+  margin-bottom: var(--space-10);
+}
+.hero-actions { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.btn-primary {
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 20px var(--color-accent-glow);
+}
+.btn-primary:hover { background: var(--color-accent-hover); transform: translateY(-1px); box-shadow: 0 6px 28px var(--color-accent-glow); }
+.btn-secondary {
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+.btn-secondary:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+.hero-stats {
+  margin-top: var(--space-20);
+  display: flex; gap: var(--space-12); flex-wrap: wrap;
+  border-top: 1px solid var(--color-divider);
+  padding-top: var(--space-8);
+}
+.hero-stat-number {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+.hero-stat-number span { color: var(--color-accent); }
+.hero-stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   SECTION BASE
+   ============================================================ */
+section { padding-block: clamp(var(--space-16), 8vw, var(--space-32)); }
+.section-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  max-width: 20ch;
+}
+.section-body {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+  line-height: 1.7;
+  margin-bottom: var(--space-10);
+}
+
+/* ============================================================
+   THESIS / WHAT WE BACK
+   ============================================================ */
+.thesis { background: var(--color-surface); }
+.thesis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+.thesis-cards { display: flex; flex-direction: column; gap: var(--space-4); }
+.thesis-card {
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex; gap: var(--space-4); align-items: flex-start;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.thesis-card:hover { border-color: var(--color-accent); box-shadow: 0 4px 20px var(--color-accent-glow); }
+.thesis-card-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--color-accent) 12%, var(--color-surface));
+  color: var(--color-accent);
+  font-size: 20px;
+}
+.thesis-card-title { font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-1); }
+.thesis-card-body { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
+/* ============================================================
+   PROGRAM
+   ============================================================ */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+.program-card {
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  position: relative; overflow: hidden;
+}
+.program-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+.program-card-num {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--color-text-faint);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+.program-card-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-3); }
+.program-card-body { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
+
+/* ============================================================
+   TEAM / ADVISORS
+   ============================================================ */
+.team { background: var(--color-surface); }
+.team-intro {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--space-16); align-items: start;
+  margin-bottom: var(--space-16);
+}
+.team-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+.team-card {
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.team-card-avatar {
+  width: 56px; height: 56px; border-radius: var(--radius-full);
+  background: color-mix(in oklab, var(--color-accent) 15%, var(--color-surface-offset));
+  margin-bottom: var(--space-4);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+}
+.team-card-name { font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-1); }
+.team-card-title { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3); }
+.team-card-bio { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.6; }
+
+/* ============================================================
+   APPLY / CTA
+   ============================================================ */
+.apply {
+  position: relative; overflow: hidden;
+  background: var(--color-primary);
+  text-align: center;
+  padding-block: clamp(var(--space-20), 10vw, var(--space-32));
+}
+[data-theme="dark"] .apply { background: #0a0d18; }
+.apply-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, var(--color-accent-glow) 0%, transparent 70%);
+}
+.apply-content { position: relative; z-index: 1; }
+.apply-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-6);
+  max-width: 20ch; margin-inline: auto;
+  line-height: 1.1;
+}
+[data-theme="dark"] .apply-heading { color: var(--color-text); }
+.apply-body {
+  font-size: var(--text-base);
+  color: color-mix(in oklab, var(--color-text-inverse) 70%, transparent);
+  max-width: 50ch; margin-inline: auto;
+  margin-bottom: var(--space-10); line-height: 1.7;
+}
+[data-theme="dark"] .apply-body { color: var(--color-text-muted); }
+.apply-actions { display: flex; justify-content: center; gap: var(--space-4); flex-wrap: wrap; }
+.btn-apply {
+  padding: var(--space-4) var(--space-10);
+  background: var(--color-accent);
+  color: #fff; font-weight: 600;
+  font-size: var(--text-base);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 32px var(--color-accent-glow);
+}
+.btn-apply:hover { background: var(--color-accent-hover); transform: translateY(-2px); }
+.btn-apply-ghost {
+  padding: var(--space-4) var(--space-8);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8); font-size: var(--text-base);
+  border-radius: var(--radius-full);
+}
+[data-theme="dark"] .btn-apply-ghost { border-color: var(--color-border); color: var(--color-text-muted); }
+.btn-apply-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--color-divider);
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--space-6); flex-wrap: wrap;
+}
+.footer-brand { display: flex; align-items: center; gap: var(--space-3); }
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  letter-spacing: 0.04em;
+}
+.footer-tagline {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+.footer-links { display: flex; gap: var(--space-6); }
+.footer-links a { font-size: var(--text-sm); color: var(--color-text-muted); }
+.footer-links a:hover { color: var(--color-text); }
+.footer-copy { font-size: var(--text-xs); color: var(--color-text-faint); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .thesis-grid, .team-intro { grid-template-columns: 1fr; gap: var(--space-10); }
+  .program-grid { grid-template-columns: 1fr; }
+  .team-cards { grid-template-columns: 1fr 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .hero-stats { gap: var(--space-8); }
+}
+@media (max-width: 480px) {
+  .team-cards { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+  <img src="logo-icon.png" 
+       height="40" 
+       alt="Pacific Foundry"
+       style="height:40px; width:auto; display:block;">
+  Pacific Foundry
+</a>
+  <div class="nav-links">
+    <a href="#thesis">Thesis</a>
+    <a href="#program">Program</a>
+    <a href="#team">Team</a>
+    <a href="#apply">Apply</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <a href="#apply" class="btn-nav">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+<!-- Full logo hero placement -->
+<div style="margin-bottom: var(--space-8); display:flex; justify-content:center;">
+  <img src="logo-main.png" 
+       alt="Pacific Foundry — Build the Frontier"
+       style="width:600px; max-width:90vw; height:auto; display:block; mix-blend-mode: screen;">
+</div>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      Founder Conversations Now Open - Cohort I Applications opening soon !
+    </div>
+    <h1 class="hero-heading">Build the <em>Frontier.</em></h1>
+    <p class="hero-body">Pacific Foundry is a next-generation accelerator for founders working at the edge of AI, quantum, and deep technology. We back the builders who refuse to wait for permission.</p>
+    <div class="hero-actions">
+      <a href="#apply" class="btn-primary">Apply to Cohort I</a>
+      <a href="#thesis" class="btn-secondary">Our Thesis →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-number">Upto $250<span>K</span></div>
+        <div class="hero-stat-label">Per company - Capital, Advisory, and Operator Support</div>
+      </div>
+      <div>
+        <div class="hero-stat-number">12<span>mo</span></div>
+        <div class="hero-stat-label">Intensive program</div>
+      </div>
+      <div>
+        <div class="hero-stat-number">10</div>
+        <div class="hero-stat-label">Founders per cohort</div>
+      </div>
+      <div>
+        <div class="hero-stat-number">SF, Seattle <span> + </span> Vancouver Corridoor</div>
+        <div class="hero-stat-label">Home bases</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="container">
+    <div class="thesis-grid">
+      <div class="fade-in">
+        <div class="section-label">Investment Thesis</div>
+        <h2 class="section-heading">We back what others call too early.</h2>
+        <p class="section-body">The most important companies of the next decade are being started right now in labs, garages, and Discord servers. We find them before the crowd does.</p>
+        <a href="#apply" class="btn-primary" style="display:inline-flex;">See if you qualify →</a>
+      </div>
+      <div class="thesis-cards fade-in">
+        <div class="thesis-card">
+          <div class="thesis-card-icon">⚡</div>
+          <div>
+            <div class="thesis-card-title">Applied AI & LLM Infrastructure</div>
+            <div class="thesis-card-body">Enterprise AI systems, agentic workflows, RAG architectures, and the infrastructure layer powering the next generation of intelligent software.</div>
+          </div>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-card-icon">⚛️</div>
+          <div>
+            <div class="thesis-card-title">Quantum Computing Applications</div>
+            <div class="thesis-card-body">Near-term quantum advantage in optimization, chemistry simulation, and cryptography. We invest in the application layer, not just the hardware.</div>
+          </div>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-card-icon">🔬</div>
+          <div>
+            <div class="thesis-card-title">Deep Tech & Hard Science</div>
+            <div class="thesis-card-body">Climate tech, biotech, advanced materials, and robotics. Companies solving problems that can't be solved with software alone.</div>
+          </div>
+        </div>
+        <div class="thesis-card">
+          <div class="thesis-card-icon">🌐</div>
+          <div>
+            <div class="thesis-card-title">Frontier Infrastructure</div>
+            <div class="thesis-card-body">The picks and shovels of frontier technology — compute, data, security, and developer tooling for the next paradigm shift.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="container">
+    <div style="max-width: var(--content-default)">
+      <div class="section-label fade-in">The Program</div>
+      <h2 class="section-heading fade-in">Twelve months. No shortcuts.</h2>
+      <p class="section-body fade-in">We don't run a 3-month demo day sprint. Pacific Foundry is a 12-month operating partnership designed for founders building complex, technically deep companies.</p>
+    </div>
+    <div class="program-grid">
+      <div class="program-card fade-in">
+        <div class="program-card-num">01</div>
+        <div class="program-card-title">Capital to Build</div>
+        <div class="program-card-body">$250K investment per company, structured as a SAFE. No board seats in exchange. We are operators, not controllers. Follow-on reserved for top performers.</div>
+      </div>
+      <div class="program-card fade-in">
+        <div class="program-card-num">02</div>
+        <div class="program-card-title">Technical Residency</div>
+        <div class="program-card-body">Monthly in-person sprints in San Francisco and Atlanta. Deep technical reviews, architecture sessions with senior engineers, and peer founder cohort dinners.</div>
+      </div>
+      <div class="program-card fade-in">
+        <div class="program-card-num">03</div>
+        <div class="program-card-title">Industry Access</div>
+        <div class="program-card-body">Direct warm introductions to enterprise design partners, Series A investors, and federal research programs (SBIR/STTR). We open doors before you have to knock.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="team-intro">
+      <div class="fade-in">
+        <div class="section-label">The Team</div>
+        <h2 class="section-heading">Operators who've built at scale.</h2>
+        <p class="section-body">Our partners are former engineers, researchers, and founders — not career investors. We've shipped production ML systems, published frontier research, and built companies from zero. We know what hard looks like.</p>
+      </div>
+      <div class="fade-in" style="padding-top: var(--space-8); border-left: 1px solid var(--color-divider); padding-left: var(--space-10);">
+        <blockquote style="font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.4; color: var(--color-text); font-style: italic;">
+          "The frontier isn't a place you find. It's a place you make."
+        </blockquote>
+        <div style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em;">— Pacific Foundry Partners</div>
+      </div>
+    </div>
+    <div class="team-cards">
+      <div class="team-card fade-in">
+        <div class="team-card-avatar">S</div>
+        <div class="team-card-name">Satish Bhambri</div>
+        <div class="team-card-title">Founder & Managing Partner</div>
+        <div class="team-card-bio">Enterprise AI leader, researcher, and founder of Pacific Foundry. Satish builds production-scale AI systems across ranking, recommendations, RAG agents, multimodal AI, and ML infrastructure. A Forbes featured and Technology Council member and MLOps Community featured speaker, his work bridges Walmart-scale AI, astrophysics research, quantum computing, and frontier venture creation. Through Pacific Foundry, he is building a platform for technical founders turning ambitious AI, health, space, and deep-tech ideas into enduring companies.
+</div>
+      </div>
+      <div class="team-card fade-in">
+        <div class="team-card-avatar">A</div>
+        <div class="team-card-name">Advisor Unveiling Soon</div>
+        <div class="team-card-title">Venture Partner</div>
+        <div class="team-card-bio">Deep tech investor, former research scientist and CEO</div>
+      </div>
+      <div class="team-card fade-in">
+        <div class="team-card-avatar">B</div>
+        <div class="team-card-name">Advisor Unveiling Soon</div>
+        <div class="team-card-title">Operator in Residence</div>
+        <div class="team-card-bio">Enterprise AI executive, former Fortune 500 CTO and YC Investor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<section class="apply" id="apply">
+  <div class="apply-bg"></div>
+  <div class="apply-content container">
+    <div class="section-label" style="color: var(--color-accent); justify-content: center; display: flex; margin-bottom: var(--space-4);">Cohort I — Applications Open</div>
+    <h2 class="apply-heading">Ready to build something that matters?</h2>
+    <p class="apply-body">We're selecting 10 founding teams for our inaugural cohort. Pre-product and pre-revenue founders are welcome. If you're working on something technically ambitious, we want to hear from you.</p>
+    <div class="apply-actions">
+      <a href="mailto:apply@pacificfoundry.ai" class="btn-apply">Apply to Cohort I</a>
+      <a href="mailto:hello@pacificfoundry.ai" class="btn-apply-ghost">Get in Touch</a>
+    </div>
+    <p style="margin-top: var(--space-8); font-size: var(--text-xs); color: rgba(255,255,255,0.35); letter-spacing: 0.06em; text-transform: uppercase;">Applications reviewed on a rolling basis</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" style="padding-block: var(--space-20); border-top: 1px solid var(--color-divider); text-align: center;">
+  <div class="container" style="display:flex; flex-direction:column; align-items:center; gap: var(--space-8);">
+    
+    <!-- Full logo with tagline — centered, prominent -->
+    <img src="logo-main.png" 
+     alt="Pacific Foundry — Build the Frontier"
+     style="width:350px; max-width:90vw; height:auto; display:block; mix-blend-mode: screen;">
+
+    <!-- Nav links -->
+    <div style="display:flex; gap: var(--space-8); flex-wrap:wrap; justify-content:center;">
+      <a href="#thesis" style="font-size: var(--text-sm); color: var(--color-text-muted);">Thesis</a>
+      <a href="#program" style="font-size: var(--text-sm); color: var(--color-text-muted);">Program</a>
+      <a href="#team" style="font-size: var(--text-sm); color: var(--color-text-muted);">Team</a>
+      <a href="mailto:apply@pacificfoundry.ai" style="font-size: var(--text-sm); color: var(--color-text-muted);">Apply</a>
+    </div>
+
+    <!-- Divider -->
+    <div style="width: 40px; height: 1px; background: var(--color-accent); opacity:0.5;"></div>
+
+    <!-- Copyright -->
+    <p style="font-size: var(--text-xs); color: var(--color-text-faint); letter-spacing: 0.06em; text-transform: uppercase;">
+      © 2026 Pacific Foundry · pacificfoundry.ai
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = 'dark';
+  r.setAttribute('data-theme', d);
+  if(t) t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    t.setAttribute('aria-label', 'Switch to ' + (d === 'dark' ? 'light' : 'dark') + ' mode');
+    t.innerHTML = d === 'dark'
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+</script>
+
+</body>
+</html>

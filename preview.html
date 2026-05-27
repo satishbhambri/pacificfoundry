@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pacific Foundry — Build the Frontier</title>
+<meta name="description" content="Pacific Foundry is a venture studio and AI lab for frontier founders building at the edge of AI, space intelligence, healthcare AI, and deep technology." />
+<meta property="og:title" content="Pacific Foundry — Build the Frontier" />
+<meta property="og:description" content="A venture studio and AI lab for frontier founders building at the edge of AI, space intelligence, healthcare AI, and deep technology." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.pacificfoundry.ai" />
+<meta name="theme-color" content="#0a0c10" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bg: #0a0c10;
+  --bg-2: #0f1219;
+  --surface: rgba(255,255,255,.045);
+  --surface-2: rgba(255,255,255,.075);
+  --line: rgba(232,230,224,.12);
+  --line-strong: rgba(232,230,224,.22);
+  --text: #ece8df;
+  --muted: #a09b91;
+  --faint: #625e57;
+  --copper: #c8813a;
+  --copper-2: #e0a064;
+  --blue: #8fa6ce;
+  --shadow: 0 24px 80px rgba(0,0,0,.38);
+  --radius: 24px;
+  --max: 1180px;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "DM Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(900px 520px at 70% 12%, rgba(200,129,58,.16), transparent 68%),
+    radial-gradient(700px 520px at 10% 22%, rgba(143,166,206,.08), transparent 62%),
+    var(--bg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+img, svg { display: block; max-width: 100%; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  color: var(--copper-2);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-weight: 700;
+  font-size: 12px;
+}
+.section-kicker { margin-bottom: 16px; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  letter-spacing: .01em;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--copper);
+  color: #130f0b;
+  box-shadow: 0 16px 42px rgba(200,129,58,.22);
+}
+.btn-primary:hover { background: var(--copper-2); }
+.btn-ghost { border-color: var(--line-strong); color: var(--text); background: rgba(255,255,255,.025); }
+.btn-ghost:hover { border-color: rgba(200,129,58,.55); color: var(--copper-2); }
+
+.pf-mark { width: 44px; height: 44px; flex: 0 0 auto; }
+.pf-logo { display: flex; align-items: center; gap: 14px; font-weight: 800; letter-spacing: .04em; }
+.pf-mark-img { width: 40px; height: 40px; object-fit: contain; display:block; flex-shrink:0; }
+.pf-full-logo { width: 340px; max-width: min(90vw, 100%); height:auto; display:block; }
+.footer-logo-img { width: 260px; max-width: 90vw; height:auto; display:block; }
+.pf-word { font-size: 15px; text-transform: uppercase; }
+
+.nav {
+  position: fixed; z-index: 50; top: 0; left: 0; right: 0;
+  padding: 18px 0;
+  transition: padding .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.nav.is-scrolled {
+  padding: 10px 0;
+  background: rgba(10,12,16,.78);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 14px; }
+.nav-links a:hover { color: var(--text); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.mobile-hide { display: inline-flex; }
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 150px 0 88px;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(232,230,224,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,230,224,.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(circle at 62% 35%, black, transparent 72%);
+  pointer-events: none;
+}
+.hero-layout {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.08fr .92fr; gap: 64px; align-items: center;
+}
+.hero-logo-lockup { margin-bottom: 34px; display:inline-flex; }
+.hero-logo-lockup .pf-full-logo { width: 380px; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 9vw, 126px);
+  line-height: .9;
+  letter-spacing: -.045em;
+  max-width: 8.2ch;
+  margin: 22px 0 26px;
+}
+.hero h1 em { color: var(--copper-2); font-style: italic; }
+.hero-copy {
+  max-width: 620px;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--muted);
+  margin-bottom: 34px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-panel {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.hero-panel::before {
+  content: ""; position: absolute; inset: -1px; border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(200,129,58,.55), transparent 34%, rgba(143,166,206,.18));
+  z-index: -1;
+}
+.panel-title { font-size: 13px; letter-spacing: .15em; color: var(--copper-2); text-transform: uppercase; font-weight: 800; margin-bottom: 18px; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stat {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(10,12,16,.5);
+  border: 1px solid var(--line);
+}
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: .95;
+  font-weight: 400;
+}
+.stat span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .09em; }
+.note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  border-left: 2px solid var(--copper);
+  padding-left: 14px;
+}
+
+section { padding: 104px 0; }
+.section-head { max-width: 760px; margin-bottom: 48px; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.6vw, 78px);
+  line-height: .96;
+  letter-spacing: -.035em;
+  margin-bottom: 18px;
+}
+.section-head p { color: var(--muted); font-size: 19px; max-width: 650px; }
+
+.thesis { background: linear-gradient(180deg, rgba(255,255,255,.03), transparent); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.thesis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.thesis-card {
+  min-height: 260px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255,255,255,.035);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.thesis-card:hover { transform: translateY(-3px); border-color: rgba(200,129,58,.5); background: rgba(255,255,255,.055); }
+.icon-dot {
+  width: 38px; height: 38px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: rgba(200,129,58,.11);
+  color: var(--copper-2);
+  margin-bottom: 22px;
+}
+.thesis-card h3 { font-size: 18px; margin-bottom: 12px; }
+.thesis-card p { color: var(--muted); font-size: 14px; }
+
+.quote-band {
+  padding: 78px 0;
+  background:
+    linear-gradient(90deg, rgba(200,129,58,.11), rgba(143,166,206,.04)),
+    rgba(255,255,255,.025);
+  border-bottom: 1px solid var(--line);
+}
+.quote-band blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(34px, 5vw, 74px);
+  line-height: 1;
+  letter-spacing: -.025em;
+  max-width: 980px;
+}
+
+.program-layout { display: grid; grid-template-columns: .95fr 1.05fr; gap: 54px; align-items: start; }
+.program-copy { position: sticky; top: 110px; }
+.deal-card {
+  margin-top: 28px;
+  border: 1px solid rgba(200,129,58,.34);
+  background: rgba(200,129,58,.065);
+  border-radius: 22px;
+  padding: 24px;
+}
+.deal-row { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-bottom: 1px solid rgba(232,230,224,.1); }
+.deal-row:last-child { border-bottom: 0; }
+.deal-row span { color: var(--muted); }
+.deal-row strong { text-align: right; }
+.program-steps { display: grid; gap: 16px; }
+.step {
+  display: grid; grid-template-columns: 72px 1fr; gap: 22px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255,255,255,.035);
+}
+.step-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: .8;
+  color: rgba(232,230,224,.22);
+}
+.step h3 { margin-bottom: 8px; font-size: 20px; }
+.step p { color: var(--muted); font-size: 15px; }
+
+.team { background: rgba(255,255,255,.03); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.team-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; align-items: stretch; }
+.founder-card, .advisor-stack article {
+  border: 1px solid var(--line);
+  background: rgba(10,12,16,.35);
+  border-radius: 24px;
+  padding: 28px;
+}
+.founder-card { display: grid; grid-template-columns: 92px 1fr; gap: 24px; }
+.avatar {
+  width: 92px; height: 92px; border-radius: 28px;
+  background: linear-gradient(135deg, rgba(200,129,58,.18), rgba(143,166,206,.08));
+  border: 1px solid rgba(200,129,58,.25);
+  display: grid; place-items: center;
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--copper-2);
+}
+.role-badge {
+  display: inline-flex;
+  margin: 8px 0 18px;
+  border: 1px solid rgba(200,129,58,.32);
+  color: var(--copper-2);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.founder-card p, .advisor-stack p { color: var(--muted); font-size: 15px; }
+.advisor-stack { display: grid; gap: 16px; }
+.advisor-stack h3 { font-size: 18px; margin-bottom: 6px; }
+.soon { color: var(--blue); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; margin-bottom: 12px; }
+
+.apply { padding: 112px 0; }
+.apply-box {
+  display: grid; grid-template-columns: .9fr 1.1fr; gap: 34px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background:
+    radial-gradient(500px 360px at 12% 5%, rgba(200,129,58,.14), transparent 70%),
+    rgba(255,255,255,.045);
+  padding: 34px;
+  box-shadow: var(--shadow);
+}
+.apply-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: .95;
+  letter-spacing: -.035em;
+  margin: 18px 0;
+}
+.apply-copy p { color: var(--muted); font-size: 18px; }
+.expectations { margin-top: 28px; display: grid; gap: 12px; color: var(--muted); font-size: 14px; }
+.expectations li { display: flex; gap: 10px; align-items: flex-start; }
+.expectations li::before { content: "—"; color: var(--copper-2); }
+
+.form {
+  background: rgba(10,12,16,.58);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: grid; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+input, select, textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.045);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 13px 14px;
+  outline: none;
+}
+textarea { min-height: 118px; resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: rgba(200,129,58,.68); box-shadow: 0 0 0 4px rgba(200,129,58,.08); }
+.form-footer { display: flex; gap: 14px; align-items: center; justify-content: space-between; margin-top: 18px; flex-wrap: wrap; }
+.small { color: var(--muted); font-size: 12px; max-width: 360px; }
+.success {
+  display: none;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(88,214,141,.32);
+  color: #9fe8ba;
+  background: rgba(88,214,141,.08);
+  border-radius: 14px;
+  font-size: 14px;
+}
+.success.show { display: block; }
+
+.footer { border-top: 1px solid var(--line); padding: 52px 0; color: var(--muted); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer a:hover { color: var(--text); }
+.disclaimer { margin-top: 20px; font-size: 11px; color: var(--faint); max-width: 820px; }
+
+@media (max-width: 940px) {
+  .hero-layout, .program-layout, .team-grid, .apply-box { grid-template-columns: 1fr; }
+  .program-copy { position: static; }
+  .thesis-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .mobile-hide { display: none; }
+}
+@media (max-width: 620px) {
+  .container { padding: 0 18px; }
+  .hero { padding-top: 122px; }
+  .stats-grid, .thesis-grid, .form-grid, .founder-card { grid-template-columns: 1fr; }
+  .pf-word { font-size: 13px; }
+  .hero-logo-lockup .pf-full-logo { width: 300px; }
+  .apply-box { padding: 20px; }
+  .step { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="pf-logo" href="#home" aria-label="Pacific Foundry home">
+        <img class="pf-mark-img" src="logo-icon.png" alt="Pacific Foundry icon">
+        <span class="pf-word">Pacific Foundry</span>
+      </a>
+
+      <div class="nav-links" aria-label="Primary navigation">
+        <a href="#thesis">Thesis</a>
+        <a href="#program">Program</a>
+        <a href="#team">Team</a>
+        <a href="#apply">Apply</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="btn btn-ghost mobile-hide" href="#program">Learn</a>
+        <a class="btn btn-primary" href="#apply">Apply</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-layout">
+        <div>
+          <a class="hero-logo-lockup" href="#home" aria-label="Pacific Foundry">
+            <img class="pf-full-logo" src="logo-main.png" alt="Pacific Foundry — Build the Frontier">
+          </a>
+
+          <div class="eyebrow">Founder conversations now open</div>
+          <h1>Build the <em>Frontier.</em></h1>
+          <p class="hero-copy">
+            Pacific Foundry is a venture studio and AI lab for technical founders building frontier AI, space intelligence, healthcare AI, infrastructure, and deep-tech companies.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#apply">Start a Founder Conversation</a>
+            <a class="btn btn-ghost" href="#program">Learn about the program</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Pacific Foundry program snapshot">
+          <div class="panel-title">Cohort I / Private Preview</div>
+          <div class="stats-grid">
+            <div class="stat">
+              <strong>Up to $250K</strong>
+              <span>Capital, advisory, and operator support</span>
+            </div>
+            <div class="stat">
+              <strong>12mo</strong>
+              <span>Active venture-building partnership</span>
+            </div>
+            <div class="stat">
+              <strong>10</strong>
+              <span>Founder teams maximum</span>
+            </div>
+            <div class="stat">
+              <strong>VAN · SEA · SF</strong>
+              <span>Pacific corridor network</span>
+            </div>
+          </div>
+          <p class="note">
+            Rolling conversations are open now. Formal cohort timing, investment terms, and legal structure are confirmed with selected teams before acceptance.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="thesis" id="thesis">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow section-kicker">Investment Thesis</div>
+          <h2>We back what others call too early.</h2>
+          <p>
+            The next category-defining companies will not come from AI wrappers alone. They will come from technical founders combining frontier models, proprietary data, scientific depth, infrastructure judgment, and distribution.
+          </p>
+        </div>
+
+        <div class="thesis-grid">
+          <article class="thesis-card">
+            <div class="icon-dot">AI</div>
+            <h3>Applied AI Infrastructure</h3>
+            <p>Agentic systems, RAG architectures, evaluation layers, recommender systems, vector search, and enterprise AI platforms.</p>
+          </article>
+          <article class="thesis-card">
+            <div class="icon-dot">SP</div>
+            <h3>Space Intelligence</h3>
+            <p>AI for astrophysics, satellites, simulation, scientific discovery, remote sensing, and frontier data systems.</p>
+          </article>
+          <article class="thesis-card">
+            <div class="icon-dot">HX</div>
+            <h3>Healthcare AI</h3>
+            <p>Workflow automation, imaging intelligence, clinical operations, responsible AI tooling, and non-diagnostic support systems.</p>
+          </article>
+          <article class="thesis-card">
+            <div class="icon-dot">∞</div>
+            <h3>Deep-Tech Formation</h3>
+            <p>Hard science, quantum-adjacent applications, climate systems, robotics, security, and infrastructure companies with real technical moats.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-band">
+      <div class="container">
+        <blockquote>“We don’t accelerate startups. We forge frontier companies.”</blockquote>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="container program-layout">
+        <div class="program-copy">
+          <div class="eyebrow section-kicker">The Program</div>
+          <div class="section-head" style="margin-bottom:0">
+            <h2>Twelve months. No shortcuts.</h2>
+            <p>
+              Pacific Foundry is designed as a high-touch operating partnership for founders building complex technical companies — not a 3-month demo-day sprint.
+            </p>
+          </div>
+
+          <div class="deal-card" aria-label="Program terms snapshot">
+            <div class="panel-title">Deal snapshot</div>
+            <div class="deal-row"><span>Structure</span><strong>SAFE / advisor + operator support</strong></div>
+            <div class="deal-row"><span>Board seats</span><strong>No board seats</strong></div>
+            <div class="deal-row"><span>Founder response</span><strong>Within 5 business days</strong></div>
+            <div class="deal-row"><span>Stage</span><strong>Pre-product to early revenue</strong></div>
+          </div>
+        </div>
+
+        <div class="program-steps">
+          <article class="step">
+            <div class="step-num">01</div>
+            <div>
+              <h3>Technical thesis review</h3>
+              <p>We pressure-test the market, architecture, data moat, regulatory path, and founder-market fit before pushing a company toward capital.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">02</div>
+            <div>
+              <h3>Operator-led company building</h3>
+              <p>Hands-on support across product strategy, AI architecture, MLOps, hiring, narrative, investor preparation, and design partner access.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num">03</div>
+            <div>
+              <h3>Distribution and capital readiness</h3>
+              <p>Warm intros to operators, angels, enterprise buyers, grant programs, and aligned early-stage investors once the company is ready.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="team" id="team">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow section-kicker">The Team</div>
+          <h2>Operators who understand hard things.</h2>
+          <p>Pacific Foundry is being built by practitioners with experience across production AI, research, infrastructure, and frontier company formation.</p>
+        </div>
+
+        <div class="team-grid">
+          <article class="founder-card">
+            <div class="avatar">S</div>
+            <div>
+              <h3>Satish Bhambri</h3>
+              <div class="role-badge">Founder & Managing Partner</div>
+              <p>
+                Enterprise AI leader, researcher, and founder of Pacific Foundry. Satish builds production-scale AI systems across ranking, recommendations, RAG agents, multimodal AI, and ML infrastructure. A Forbes Technology Council member and MLOps Community featured speaker, his work bridges Walmart-scale AI, astrophysics research, quantum computing, and frontier venture creation. Through Pacific Foundry, he is building a platform for technical founders turning ambitious AI, health, space, and deep-tech ideas into enduring companies.
+              </p>
+            </div>
+          </article>
+
+          <div class="advisor-stack">
+            <article>
+              <div class="soon">Announcement forthcoming</div>
+              <h3>Venture Partner</h3>
+              <p>Deep-tech investor and operator network forming across AI infrastructure, research commercialization, and frontier company formation.</p>
+            </article>
+            <article>
+              <div class="soon">Announcement forthcoming</div>
+              <h3>Operator in Residence</h3>
+              <p>Enterprise AI and product leadership advisors will be announced as Pacific Foundry formalizes its first founder support network.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply" id="apply">
+      <div class="container">
+        <div class="apply-box">
+          <div class="apply-copy">
+            <div class="eyebrow">Founder intake</div>
+            <h2>Tell us what you’re building.</h2>
+            <p>
+              We are speaking with technical founders building ambitious AI, health, space, infrastructure, and deep-tech companies. Founder conversations are reviewed on a rolling basis with a target response within 5 business days.
+            </p>
+            <ul class="expectations">
+              <li>Best fit: deeply technical founders with a non-obvious moat.</li>
+              <li>Pre-product, pre-revenue, and early-revenue teams are welcome.</li>
+              <li>We prioritize seriousness, technical depth, and speed of learning.</li>
+            </ul>
+          </div>
+
+          <form class="form" id="founderForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Founder name</label>
+                <input id="name" name="name" autocomplete="name" required placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@company.com" />
+              </div>
+              <div class="field">
+                <label for="company">Company / project</label>
+                <input id="company" name="company" required placeholder="Company name" />
+              </div>
+              <div class="field">
+                <label for="stage">Stage</label>
+                <select id="stage" name="stage" required>
+                  <option value="">Select stage</option>
+                  <option>Idea / research</option>
+                  <option>Prototype</option>
+                  <option>Pre-revenue</option>
+                  <option>Early revenue</option>
+                  <option>Raising</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="vertical">Vertical</label>
+                <select id="vertical" name="vertical" required>
+                  <option value="">Select focus area</option>
+                  <option>Applied AI / infrastructure</option>
+                  <option>Healthcare AI</option>
+                  <option>Space intelligence</option>
+                  <option>Deep tech / hard science</option>
+                  <option>Other frontier technology</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="pitch">What are you building?</label>
+                <textarea id="pitch" name="pitch" required placeholder="Briefly describe the problem, product, technical moat, and why now."></textarea>
+              </div>
+              <div class="field full">
+                <label for="link">Website / deck / LinkedIn</label>
+                <input id="link" name="link" placeholder="https://" />
+              </div>
+            </div>
+            <div class="form-footer">
+              <button class="btn btn-primary" type="submit">Submit founder intake</button>
+              <p class="small">This form opens your email client with a formatted intake note. No information is stored on this page.</p>
+            </div>
+            <div class="success" id="successMessage">Your intake draft has been created. Send the email to complete submission.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="pf-logo" href="#home" aria-label="Pacific Foundry home">
+          <img class="footer-logo-img" src="logo-main.png" alt="Pacific Foundry — Build the Frontier">
+        </a>
+        <div class="footer-links">
+          <a href="#thesis">Thesis</a>
+          <a href="#program">Program</a>
+          <a href="#team">Team</a>
+          <a href="#apply">Apply</a>
+          <a href="mailto:hello@pacificfoundry.ai">hello@pacificfoundry.ai</a>
+        </div>
+      </div>
+      <p class="disclaimer">
+        © 2026 Pacific Foundry. Build the Frontier. Pacific Foundry is currently conducting founder conversations. Any investment, advisory, or cohort participation remains subject to diligence, documentation, legal review, and final written agreement.
+      </p>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 16);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const form = document.getElementById('founderForm');
+  const success = document.getElementById('successMessage');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    const subject = encodeURIComponent('Pacific Foundry Founder Intake — ' + data.company);
+    const body = encodeURIComponent(
+`Founder name: ${data.name}
+Email: ${data.email}
+Company / project: ${data.company}
+Stage: ${data.stage}
+Vertical: ${data.vertical}
+Website / deck / LinkedIn: ${data.link || 'N/A'}
+
+What are you building?
+${data.pitch}
+
+Submitted via pacificfoundry.ai founder intake.`
+    );
+
+    success.classList.add('show');
+    window.location.href = `mailto:apply@pacificfoundry.ai?subject=${subject}&body=${body}`;
+  });
+})();
+</script>
+</body>
+</html>
