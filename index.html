@@ -156,8 +156,9 @@ a, button { transition: color var(--transition), background var(--transition), b
 }
 .nav-logo-mark {
   display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px;
+  width: 36px; height: 36px; flex-shrink: 0; overflow: hidden; border-radius: 6px;
 }
+.nav-logo-mark img { width: 36px; height: 36px; object-fit: cover; object-position: center top; display: block; }
 .nav-links {
   display: flex; align-items: center; gap: var(--space-8);
 }
@@ -512,7 +513,7 @@ section { padding-block: clamp(var(--space-16), 8vw, var(--space-32)); }
 <nav class="nav">
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark">
-      <img src="logoFirstDraft.jpg" height="36" alt="Pacific Foundry" style="border-radius:4px;">
+      <img src="logoFirstDraft.jpg" width="36" height="36" alt="Pacific Foundry" loading="eager">
     </div>
     Pacific Foundry
   </a>
@@ -697,11 +698,7 @@ section { padding-block: clamp(var(--space-16), 8vw, var(--space-32)); }
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="Pacific Foundry">
-          <rect width="32" height="32" rx="6" fill="#1a2744"/>
-          <path d="M7 8h7c2.8 0 5 2.2 5 5s-2.2 5-5 5H7V8z" fill="none" stroke="#b87333" stroke-width="2"/>
-          <path d="M16 18h9M20.5 8v18" stroke="#e8e6e0" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <img src="logoFirstDraft.jpg" width="36" height="36" alt="Pacific Foundry" loading="lazy" style="border-radius:6px; object-fit:cover; object-position: center top;">
         <div>
           <div class="footer-brand-name">Pacific Foundry</div>
           <div class="footer-tagline">Build the Frontier</div>
